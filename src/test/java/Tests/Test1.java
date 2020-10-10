@@ -16,6 +16,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -26,13 +28,13 @@ import static org.junit.Assert.assertThat;
 public class Test1 {
 
     public static WebDriver driver;
+    WebDriverWait wait;
     public static BrowserMobProxy proxy;
 
     @BeforeClass
     public static void setup(){
         String path = System.getProperty("user.dir") + "/webdriver/chromedriver.exe";
         System.setProperty("webdriver.chrome.driver", path);
-
 
         //старт прокси
         proxy = new BrowserMobProxyServer();
@@ -67,11 +69,8 @@ public class Test1 {
         search.sendKeys("GeForce 1650");
         search.sendKeys(Keys.ENTER);
 
-        try{
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+            wait = new WebDriverWait(driver, 10);
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("h3.LC20lb")));
 
         // получить данные HAR
         Har har = proxy.getHar();
