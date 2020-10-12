@@ -67,7 +67,7 @@ public class Test1 {
 
         WebElement search = driver.findElement(By.name("q"));
         search.sendKeys("GeForce 1650");
-        search.sendKeys(Keys.ENTER);
+        search.sendKeys(Keys.ENTER);//
 
             wait = new WebDriverWait(driver, 10);
             wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("h3.LC20lb")));
